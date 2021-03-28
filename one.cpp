@@ -1,18 +1,23 @@
-int findSubarray(vector<int> arr, int n ) 
+#include<bits/stdc++.h>
+using namespace std;
+int main()
 {
-    unordered_map<int,int>m;
-    int sum=0,sum1=0;
-    m[0]=1;
-    for(int i=0;i<n;i++)
-    {
-        sum=arr[i]+sum;
-        if(m.find(sum)==m.end())
-        m[sum]++;
-        else
-        {
-        sum1=sum1+(m[sum]);
-        m[sum]++;
-    }
-    }
-    return sum1;
+
+unordered_map<int,int> ump;
+vector<int> arr{6,-1,-3,4,-2,2,4,6,-12,-7};
+int n=arr.size();
+int k=6; 
+int count=0;
+int sum=0;
+for (int i=0;i<n;i++)
+{
+    sum=sum+arr[i];
+    if(sum==k)
+        count++;
+
+    if(ump.find(sum-k)!=ump.end())
+        count=count+ump[sum-k];
+    ump[sum]++;
+}
+cout<<count<<endl;
 }
